@@ -21,7 +21,8 @@ import com.eagle.util.LoggerImpl;
  * @author king
  * 
  */
-public class ClientImpl implements Client,ConfigurationAWare{
+public class ClientImpl implements Client, ConfigurationAWare {
+
 	private Socket client = null;
 	private ObjectOutputStream oos = null;
 	private BufferedReader br = null;
@@ -69,12 +70,12 @@ public class ClientImpl implements Client,ConfigurationAWare{
 	@Override
 	public void setConfiguration(Configuration conf) {
 		try {
-			backUp=(BackUpImpl) conf.getBackup();
-			logger=(LoggerImpl) conf.getLogger();
+			backUp = (BackUpImpl) conf.getBackup();
+			logger = (LoggerImpl) conf.getLogger();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

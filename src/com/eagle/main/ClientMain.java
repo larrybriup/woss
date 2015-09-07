@@ -10,13 +10,10 @@ import com.briup.util.Configuration;
 import com.briup.util.Logger;
 import com.briup.woss.client.Client;
 import com.briup.woss.client.Gather;
-import com.eagle.client.ClientImpl;
-import com.eagle.client.GatherImpl;
-import com.eagle.util.BackUpImpl;
 import com.eagle.util.ConfigurationImp;
-import com.eagle.util.LoggerImpl;
 
 public class ClientMain {
+
 	static Configuration conf = null;
 	static Collection<BIDR> c = null;
 	static Collection<BIDR> cc = null;
@@ -42,7 +39,7 @@ public class ClientMain {
 			}
 
 			logger.info("正在读取...");
-			if((c = gi.gather())!=null) {
+			if ((c = gi.gather()) != null) {
 				client.send(c);
 			}
 
@@ -51,9 +48,9 @@ public class ClientMain {
 
 				public void run() {
 					try {
-						if((ccc = gi.gather())!=null&&ccc.size()!=0) {
-						client.send(ccc);
-						}else {
+						if ((ccc = gi.gather()) != null && ccc.size() != 0) {
+							client.send(ccc);
+						} else {
 							logger.info("日志文件没有增加,不重复获取!");
 						}
 					} catch (Exception e) {
@@ -61,14 +58,14 @@ public class ClientMain {
 					}
 				}
 			};
-			t.schedule(tt, 4000, 10000);//10秒执行一次gather
+			t.schedule(tt, 4000, 10000);// 10秒执行一次gather
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
 				if (c.size() != 0) {
 					BackUP bak = (BackUP) conf.getBackup();
 					bak.store("clientStore.txt", c, false);
-					logger.error(e.getMessage()+",系统已经为您备份成功!\n共备份了" + c.size() + "条数据.");
+					logger.error(e.getMessage() + ",系统已经为您备份成功!\n共备份了" + c.size() + "条数据.");
 				}
 			} catch (Exception e1) {
 				e1.printStackTrace();

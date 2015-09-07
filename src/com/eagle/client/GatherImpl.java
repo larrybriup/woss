@@ -35,6 +35,7 @@ import com.eagle.util.LoggerImpl;
  * @group SuperEagle
  */
 public class GatherImpl implements Gather, ConfigurationAWare {
+
 	private FileInputStream fis = null;
 	private BufferedInputStream bis = null;
 	private BufferedReader br = null;
@@ -42,36 +43,35 @@ public class GatherImpl implements Gather, ConfigurationAWare {
 	private String filePath;
 	private BackUP backUp;
 	private Logger logger;
-	 static long newLen=0;
-	 static long oldLen=0;
+	private static long newLen = 0;
+	private static long oldLen = 0;
 
 	public Collection<BIDR> gather() {
 
-	Map<String, BIDR> map = new LinkedHashMap<String,BIDR>(50);//放上的
-	Collection<BIDR> c = new LinkedHashSet<BIDR>(50);//放配对好的
+		Map<String, BIDR> map = new LinkedHashMap<String, BIDR>(50);// 放上的
+		Collection<BIDR> c = new LinkedHashSet<BIDR>(50);// 放配对好的
 
 		try {
-			//接受数据
-			br = new BufferedReader(new InputStreamReader(new FileInputStream(
-					new File(filePath))));
-			
-			if(backUp.load("map.txt", backUp.LOAD_UNREMOVE)!=null) {
-				
-				map=(Map<String, BIDR>) backUp.load("map.txt", backUp.LOAD_REMOVE);
+			// 接受数据
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(filePath))));
+
+			if (backUp.load("map.txt", backUp.LOAD_UNREMOVE) != null) {
+
+				map = (Map<String, BIDR>) backUp.load("map.txt", backUp.LOAD_REMOVE);
 				logger.info("加载map成功!");
 			}
-			
-			//精华部分,可以实现动态获取
-			newLen=new File(filePath).length();//把现文件的长度付给newLen
-			if(oldLen==newLen) {//如果现在的文件的长度等于原来的文件的长度,则跳过
+
+			// 精华部分,可以实现动态获取
+			newLen = new File(filePath).length();// 把现文件的长度付给newLen
+			if (oldLen == newLen) {// 如果现在的文件的长度等于原来的文件的长度,则跳过
 				br.skip(newLen);
-			}else {//否则跳过原来的文件长度,并更新oldLen
-			br.skip(oldLen);
-			oldLen=newLen;
+			} else {// 否则跳过原来的文件长度,并更新oldLen
+				br.skip(oldLen);
+				oldLen = newLen;
 			}
-			
+
 			String userLogs = "";
-			while ((userLogs = br.readLine()) != null) {//读取
+			while ((userLogs = br.readLine()) != null) {// 读取
 
 				String[] userItems = userLogs.split("[#]");
 
@@ -81,51 +81,46 @@ public class GatherImpl implements Gather, ConfigurationAWare {
 
 					// 是7就放入list1,是八就和list1中的数据配对,然后放入list2并删除list1中的此行
 					if (userInfos[2].equals("7")) {
-						
-						
-						Timestamp login_date = new Timestamp(
-								Long.parseLong(userInfos[3]));
 
-						BIDR b = new BIDR(userInfos[0], userInfos[4],
-								login_date, null, userInfos[1], null);
+						Timestamp login_date = new Timestamp(Long.parseLong(userInfos[3]));
+
+						BIDR b = new BIDR(userInfos[0], userInfos[4], login_date, null, userInfos[1], null);
 
 						map.put(userInfos[4], b);
-						
-					} else {//如果是8下线
-						for (int k = 0; k < map.size(); k++) {//遍历map
 
-							BIDR bidr = map.get(userInfos[4]);//通过key取得BIDR
-							
-								Timestamp logout_date = new Timestamp(
-										Long.parseLong(userInfos[3]));
+					} else {// 如果是8下线
+						for (int k = 0; k < map.size(); k++) {// 遍历map
 
-								
-								long login = bidr.getLogin_date().getTime();
-								long logout = logout_date.getTime();
-								Integer time_deration = (int) (logout - login);
+							BIDR bidr = map.get(userInfos[4]);// 通过key取得BIDR
 
-								bidr.setLogout_date(logout_date);
-								bidr.setTime_deration(time_deration);
-								
-								c.add(bidr);//把对象放入set集合
+							Timestamp logout_date = new Timestamp(Long.parseLong(userInfos[3]));
+
+							long login = bidr.getLogin_date().getTime();
+							long logout = logout_date.getTime();
+							Integer time_deration = (int) (logout - login);
+
+							bidr.setLogout_date(logout_date);
+							bidr.setTime_deration(time_deration);
+
+							c.add(bidr);// 把对象放入set集合
 						}
-						map.remove(userInfos[4]);//配对成功之后删除map中无用的对象
+						map.remove(userInfos[4]);// 配对成功之后删除map中无用的对象
 					}
 				}
 			}
-			if (map != null&&map.size()!=0) {
-				backUp.store("map.txt", map,
-						BackUP.STORE_OVERRIDE);//备份未配对成功的上线记录,覆盖已经加载过的map
+			if (map != null && map.size() != 0) {
+				backUp.store("map.txt", map, BackUP.STORE_OVERRIDE);// 备份未配对成功的上线记录,覆盖已经加载过的map
 				logger.info("备份map成功!");
 			}
-			if(br!=null)br.close();
-		
+			if (br != null)
+				br.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			try {
-				if(c!=null) {
-				backUp.store("clientStore.txt", c, false);
-				logger.fatal(e.getMessage()+"发生意外!已经为您成功备份!");
+				if (c != null) {
+					backUp.store("clientStore.txt", c, false);
+					logger.fatal(e.getMessage() + "发生意外!已经为您成功备份!");
 				}
 			} catch (Exception e1) {
 				e1.printStackTrace();
@@ -144,7 +139,6 @@ public class GatherImpl implements Gather, ConfigurationAWare {
 		try {
 			backUp = conf.getBackup();
 			logger = (LoggerImpl) conf.getLogger();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

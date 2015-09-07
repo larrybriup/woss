@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <woss>
 	<dbstore class="com.eagle.server.DBStoreImpl">
-		<driver>oracle.jdbc.driver.OracleDriver</driver>
-		<url>jdbc:oracle:thin:@127.0.0.1:1521:XE</url>
-		<username>king</username>
-		<password>king999</password>
+<!-- 		<driver>oracle.jdbc.driver.OracleDriver</driver> -->
+<!-- 		<url>jdbc:oracle:thin:@127.0.0.1:1521:XE</url> -->
+<!-- 		<username>king</username> -->
+<!-- 		<password>king999</password> -->
+		<driver>com.mysql.jdbc.Driver</driver>
+		<url>jdbc:mysql://localhost:3306/test_db</url>
+		<username>test</username>
+		<password>test</password>
 	</dbstore>
 
 	<logger class="com.eagle.util.LoggerImpl">
@@ -20,7 +24,7 @@
 	</gather>
 
 	<client class="com.eagle.client.ClientImpl">
-		<back_file>clientStore.txt</back_file>
+		<back-file>clientStore.txt</back-file>
 		<ip>127.0.0.1</ip>
 		<port>1111</port>
 	</client>

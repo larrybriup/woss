@@ -49,8 +49,6 @@ public class DBStoreImpl implements DBStore {
 				i = n;
 			}
 			
-			
-			
 			ps.setString(1, bidr.getAAA_login_name());
 			ps.setString(2, bidr.getLogin_ip());
 			ps.setTimestamp(3, bidr.getLogin_date());

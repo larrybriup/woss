@@ -22,7 +22,7 @@ public class BackUpImpl implements BackUP {
 
 	public void store(String storeName, Object paramObject, boolean flag)
 			throws Exception {
-		File sFile = new File(this.storePath + "/" + storeName);
+		File sFile = new File(this.storePath + File.pathSeparator + storeName);
 		if (!sFile.exists())
 			sFile.createNewFile();
 		ObjectOutputStream oos = null;
@@ -49,14 +49,14 @@ public class BackUpImpl implements BackUP {
 	public Object load(String loadName, boolean flag) throws Exception {
 		Object object = null;
 		ObjectInputStream ois = null;
-		File lFile = new File(storePath + "/" + loadName);
+		File file = new File(storePath + File.pathSeparator + loadName);
 		try {
-			if (lFile.exists() && lFile.isFile() && lFile.length() > 0) {
-				ois = new ObjectInputStream(new FileInputStream(lFile));
+			if (file.exists() && file.isFile() && file.length() > 0) {
+				ois = new ObjectInputStream(new FileInputStream(file));
 
 				object = ois.readObject();
 				if (flag) {//如果flag是true
-					lFile.deleteOnExit();//那么在退出时把加载的文件删除
+					file.deleteOnExit();//那么在退出时把加载的文件删除
 				}
 			}
 		} catch (Exception e) {

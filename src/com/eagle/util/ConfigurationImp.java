@@ -19,6 +19,7 @@ import com.briup.woss.server.DBStore;
 import com.briup.woss.server.Server;
 
 public class ConfigurationImp implements Configuration {
+
 	String dbStoreClassPath = null;
 	String url = null;
 	String driver = null;
@@ -44,6 +45,7 @@ public class ConfigurationImp implements Configuration {
 	String back_file_server = null;
 
 	private Properties p;
+
 	public ConfigurationImp() {
 		this.parseAndInit();
 	}
@@ -68,7 +70,7 @@ public class ConfigurationImp implements Configuration {
 				List<Element> list1 = element1.elements();
 				for (Element element2 : list1) {
 					if (element2.getName() == "url") {
-						url = element2.getText();
+						url = element2.getTextTrim();
 					}
 					if (element2.getName() == "driver") {
 						driver = element2.getText();
@@ -112,7 +114,7 @@ public class ConfigurationImp implements Configuration {
 				clientClassPath = element1.attribute("class").getText();
 				List<Element> list1 = element1.elements();
 				for (Element element2 : list1) {
-					if (element2.getName() == "back_file") {
+					if (element2.getName() == "back-file") {
 						back_file_client = element2.getText();
 					}
 					if (element2.getName() == "ip") {
@@ -197,8 +199,7 @@ public class ConfigurationImp implements Configuration {
 	}
 
 	public DBStore getDBStore() throws Exception {
-		DBStore dbStore = (DBStore) Class.forName(dbStoreClassPath)
-				.newInstance();
+		DBStore dbStore = (DBStore) Class.forName(dbStoreClassPath).newInstance();
 		if (dbStore instanceof ConfigurationAWare) {
 			((ConfigurationAWare) dbStore).setConfiguration(this);
 		}

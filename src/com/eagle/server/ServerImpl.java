@@ -18,6 +18,7 @@ import com.eagle.util.BackUpImpl;
 import com.eagle.util.LoggerImpl;
 
 public class ServerImpl implements Server, ConfigurationAWare {
+
 	private ServerSocket server = null;
 	private Socket client = null;
 	private ObjectInputStream ois = null;
@@ -35,11 +36,11 @@ public class ServerImpl implements Server, ConfigurationAWare {
 			server = new ServerSocket(port);
 			while (flag) {
 				client = server.accept();
-				Thread t = new ServerThread(client,db,backUp,logger,storeName);
+				Thread t = new ServerThread(client, db, backUp, logger, storeName);
 				t.start();
 			}
-//			shutdown();
-		} catch ( Exception e) {
+			// shutdown();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -47,7 +48,7 @@ public class ServerImpl implements Server, ConfigurationAWare {
 
 	public void shutdown() {
 		try {
-			flag=false;
+			flag = false;
 			ois.close();
 			client.close();
 			server.close();
@@ -66,7 +67,7 @@ public class ServerImpl implements Server, ConfigurationAWare {
 	@Override
 	public void setConfiguration(Configuration conf) {
 		try {
-			db=conf.getDBStore();
+			db = conf.getDBStore();
 			backUp = (BackUpImpl) conf.getBackup();
 			logger = (LoggerImpl) conf.getLogger();
 		} catch (Exception e) {
