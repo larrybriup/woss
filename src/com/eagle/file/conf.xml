@@ -16,7 +16,7 @@
 	</logger>
 
 	<backup class="com.eagle.util.BackUpImpl">
-		<back-temp>src/com/eagle/backUpFile</back-temp>
+		<back-temp>src/com/eagle/file/backup</back-temp>
 	</backup>
 
 	<gather class="com.eagle.client.GatherImpl">

@@ -24,7 +24,6 @@ public class DBStoreImpl implements DBStore {
 		driver = p.getProperty("driver");
 		username = p.getProperty("username");
 		password = p.getProperty("password");
-
 	}
 
 	public void saveToDB(Collection<BIDR> bidrs) throws Exception {

@@ -42,7 +42,6 @@ public class Dom4jTest {
 					System.out.print(studentPropertyName + " = " + studentPropertyValue + "\t");
 				}
 				System.out.println();
-
 			}
 
 		} catch (Exception e) {

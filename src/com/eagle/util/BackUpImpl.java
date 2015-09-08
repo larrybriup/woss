@@ -20,47 +20,46 @@ public class BackUpImpl implements BackUP {
 		storePath = p.getProperty("back_temp");
 	}
 
-	public void store(String storeName, Object paramObject, boolean flag)
+	public void store(String storeName, Object obj, boolean flag)
 			throws Exception {
-		File sFile = new File(this.storePath + File.pathSeparator + storeName);
-		if (!sFile.exists())
-			sFile.createNewFile();
+		
+		File file = new File(this.storePath + File.separator + storeName);
+		
+		if (!file.exists())
+			file.createNewFile();
+		
 		ObjectOutputStream oos = null;
-
 		try {
-			oos = new ObjectOutputStream(new FileOutputStream(sFile, flag));
+			oos = new ObjectOutputStream(new FileOutputStream(file, flag));
 
-			oos.writeObject(paramObject);
+			oos.writeObject(obj);
 
 			oos.flush();
 
-		} catch (Exception e) {
-			e.printStackTrace();
 		} finally {
-			try {
 				if (oos != null)
 					oos.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 	}
 
 	public Object load(String loadName, boolean flag) throws Exception {
+		StringBuilder sb = new StringBuilder();
 		Object object = null;
 		ObjectInputStream ois = null;
-		File file = new File(storePath + File.pathSeparator + loadName);
+		File file = new File(storePath + File.separator + loadName);
 		try {
 			if (file.exists() && file.isFile() && file.length() > 0) {
 				ois = new ObjectInputStream(new FileInputStream(file));
 
+//				while ((object = ois.readObject()) != null) {
+//					sb.append(object);
+//				}
+				
 				object = ois.readObject();
-				if (flag) {//如果flag是true
-					file.deleteOnExit();//那么在退出时把加载的文件删除
+				if (flag) {	//如果flag是true
+					file.deleteOnExit();	//那么在退出时把加载的文件删除
 				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		} finally {
 			if (ois != null) {
 				ois.close();

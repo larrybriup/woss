@@ -6,11 +6,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
 
@@ -23,10 +21,13 @@ import com.briup.woss.client.Gather;
 import com.eagle.util.LoggerImpl;
 
 /**
- * 收集用户上下线日子文件,返回BIDR类型的Collection集合 Collection集合中存放: private String
- * AAA_login_name; 用户登陆名 private String login_ip; 登陆IP private Timestamp
- * login_date;登陆日期,时间戳 private Timestamp logout_date; 推出登陆日期,时间戳 private String
- * NAS_ip; NASIP private Integer time_deration;上网持续时间,时间戳
+ * 收集用户上下线日期文件,返回BIDR类型的Collection集合， Collection集合中存放: 
+ * private String AAA_login_name; 用户登陆名 
+ * private String login_ip; 登陆IP 
+ * private Timestamp login_date;登陆日期,时间戳
+ * private Timestamp logout_date; 推出登陆日期,时间戳 
+ * private String NAS_ip; NASIP 
+ * private Integer time_deration;上网持续时间,时间戳
  * 
  * #briup1660|037:wKgB1660A|7|1239110900|44.211.221.247
  * #|037:wKgB1660A|8|1239203860|44.211.221.247
@@ -48,21 +49,20 @@ public class GatherImpl implements Gather, ConfigurationAWare {
 
 	public Collection<BIDR> gather() {
 
-		Map<String, BIDR> map = new LinkedHashMap<String, BIDR>(50);// 放上的
-		Collection<BIDR> c = new LinkedHashSet<BIDR>(50);// 放配对好的
+		Map<String, BIDR> map = new HashMap<String, BIDR>(50);// 放上的
+		Collection<BIDR> c = new HashSet<BIDR>(50);// 放配对好的
 
 		try {
 			// 接受数据
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(filePath))));
 
 			if (backUp.load("map.txt", backUp.LOAD_UNREMOVE) != null) {
-
 				map = (Map<String, BIDR>) backUp.load("map.txt", backUp.LOAD_REMOVE);
 				logger.info("加载map成功!");
 			}
 
 			// 精华部分,可以实现动态获取
-			newLen = new File(filePath).length();// 把现文件的长度付给newLen
+			newLen = new File(filePath).length();// 把现文件的长度赋给newLen
 			if (oldLen == newLen) {// 如果现在的文件的长度等于原来的文件的长度,则跳过
 				br.skip(newLen);
 			} else {// 否则跳过原来的文件长度,并更新oldLen
@@ -79,7 +79,7 @@ public class GatherImpl implements Gather, ConfigurationAWare {
 
 					String[] userInfos = userItems[j].split("[|]");
 
-					// 是7就放入list1,是八就和list1中的数据配对,然后放入list2并删除list1中的此行
+					// 是7就放入list1,是8就和list1中的数据配对,然后放入list2并删除list1中的此行
 					if (userInfos[2].equals("7")) {
 
 						Timestamp login_date = new Timestamp(Long.parseLong(userInfos[3]));
@@ -138,7 +138,7 @@ public class GatherImpl implements Gather, ConfigurationAWare {
 	public void setConfiguration(Configuration conf) {
 		try {
 			backUp = conf.getBackup();
-			logger = (LoggerImpl) conf.getLogger();
+			logger = conf.getLogger();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

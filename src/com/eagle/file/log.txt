@@ -1762,3 +1762,36 @@
 2013-09-26 20:06:57,163  INFO [Timer-0] (LoggerImpl.java:33) - 加载map成功!
 2013-09-26 20:06:57,207  INFO [Timer-0] (LoggerImpl.java:33) - 备份map成功!
 2013-09-26 20:06:57,208  INFO [Timer-0] (LoggerImpl.java:33) - 日志文件没有增加,不重复获取!
+2015-09-08 10:10:52,726  INFO [main] (LoggerImpl.java:26) - 开启服务器...
+2015-09-08 10:10:52,751  INFO [main] (LoggerImpl.java:26) - 加载备份文件...
+2015-09-08 10:10:52,753  INFO [main] (LoggerImpl.java:26) - 没有备份文件!
+2015-09-08 10:11:09,977  INFO [main] (LoggerImpl.java:26) - 正在读取...
+2015-09-08 10:11:17,305  INFO [main] (LoggerImpl.java:26) - 备份map成功!
+2015-09-08 10:11:17,315  INFO [main] (LoggerImpl.java:26) - 连接服务器成功!
+2015-09-08 10:11:17,316  INFO [main] (LoggerImpl.java:26) - 正在准备数据...
+2015-09-08 10:11:17,336  INFO [main] (LoggerImpl.java:26) - 开始发送数据...
+2015-09-08 10:11:35,916  INFO [main] (LoggerImpl.java:26) - 数据发送完毕!共发送了14895条数据!
+2015-09-08 10:11:40,081  INFO [Timer-0] (LoggerImpl.java:26) - 加载map成功!
+2015-09-08 10:11:45,293  INFO [Timer-0] (LoggerImpl.java:26) - 备份map成功!
+2015-09-08 10:11:45,295  INFO [Timer-0] (LoggerImpl.java:26) - 日志文件没有增加,不重复获取!
+2015-09-08 10:11:50,024  INFO [Timer-0] (LoggerImpl.java:26) - 加载map成功!
+2015-09-08 10:11:54,891  INFO [Timer-0] (LoggerImpl.java:26) - 备份map成功!
+2015-09-08 10:11:54,892  INFO [Timer-0] (LoggerImpl.java:26) - 日志文件没有增加,不重复获取!
+2015-09-08 10:12:00,032  INFO [Timer-0] (LoggerImpl.java:26) - 加载map成功!
+2015-09-08 10:12:04,614  INFO [Timer-0] (LoggerImpl.java:26) - 备份map成功!
+2015-09-08 10:12:04,617  INFO [Timer-0] (LoggerImpl.java:26) - 日志文件没有增加,不重复获取!
+2015-09-08 10:14:04,812  INFO [main] (LoggerImpl.java:26) - 开启服务器...
+2015-09-08 10:14:04,820  INFO [main] (LoggerImpl.java:26) - 加载备份文件...
+2015-09-08 10:14:14,566  INFO [main] (LoggerImpl.java:26) - 没有备份文件!
+2015-09-08 10:14:16,282  INFO [main] (LoggerImpl.java:26) - 正在读取...
+2015-09-08 10:14:16,467  INFO [main] (LoggerImpl.java:26) - 加载map成功!
+2015-09-08 10:14:24,537  INFO [main] (LoggerImpl.java:26) - 备份map成功!
+2015-09-08 10:14:24,545  INFO [main] (LoggerImpl.java:26) - 连接服务器成功!
+2015-09-08 10:14:24,547  INFO [main] (LoggerImpl.java:26) - 正在准备数据...
+2015-09-08 10:14:24,551  INFO [main] (LoggerImpl.java:26) - 开始发送数据...
+2015-09-08 10:14:35,703  INFO [main] (LoggerImpl.java:26) - 数据发送完毕!共发送了14895条数据!
+2015-09-08 10:14:39,827  INFO [Timer-0] (LoggerImpl.java:26) - 加载map成功!
+2015-09-08 10:16:23,949 ERROR [Thread-0] (LoggerImpl.java:36) - 大哥啊!Communications link failure
+
+Last packet sent to the server was 0 ms ago.已经成功为您备份!
+2015-09-08 10:19:15,503 ERROR [Thread-2] (LoggerImpl.java:36) - 大哥啊!Table 'test_db.t_detail_15' doesn't exist已经成功为您备份!

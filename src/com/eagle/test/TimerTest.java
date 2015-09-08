@@ -21,12 +21,9 @@ public class TimerTest {
 
 		Timer t = new Timer();
 		TimerTask tt = new TimerTask() {
-
 			@Override
 			public void run() {
 				test.increment().prt("choda ");
-				;
-
 			}
 		};
 		// t.scheduleAtFixedRate(tt, 0, 10000);
