@@ -36,7 +36,8 @@ public class ServerThread extends Thread {
 				db.saveToDB(bidrs);
 				logger.info("存储成功!共存储" + bidrs.size() + "条数据!");
 			} else {
-				logger.error("没有数据,不能存储!");
+				logger
+				.error("没有数据,不能存储!");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

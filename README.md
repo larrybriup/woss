@@ -1,18 +1,18 @@
 运动社区
-开发环境：Sun Solaris OS；
-开发语言及技术：JavaBeans 、Jsp/Servlet 、Struts 、PL/SQL ；
+开发环境： Linux Ubuntu OS；
+开发语言及技术： Jsp/Servlet, JavaBeans, Struts, JDBC, PL/SQL;
 数据库：Oracle10g；
 开发工具：exlipse，JDK1.6，Tomcat；
 项目描述：为运动爱好者提供一个网上交流平台,注册登录后完成特定动作会有相应的加分;达到
   一定级别的会员拥有更多的权限;会员间可以互动发邮件,发消息,每位会员都有一个
    个性空间;
-责任描述：我负责整个项目,所以在开发的过程中体会到了事前规划的重要性;事先说明文档没有写
-	  好直接影响后续代码的实现和功能的完整性;
+责任描述：我负责整个项目,在开发过程中遇到了很多问题： 如：JSP乱码，JAR包薪旧版本不一致导致的一些问题，
+		所以在开发的过程中体会到了说明文档的重要性，基础知识的重要性；
 
 2013/07-2013/9：
 电信运营支撑系统
 软件环境： Web应用服务器：Weblogic;
-开发语言及技术：JavaBeans, Jsp/Servlet, Struts, PL/SQL;
+开发语言及技术：Java: Thread, Socket, Collection, Class;
 数据库：Oracle9i；
 操作系统： Linux Ubuntu OS；
 开发工具：exlipse，JDK1.6；
