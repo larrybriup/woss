@@ -49,6 +49,8 @@
 具有良好的审美观和用户体验意识。
 具备良好的问题分析与解决能力。
 
+经常访问的网站： CSDN,Github,Plunkr,Codepen,MDN,W3C,Stack Overflow
+
 对加班的看法？
 	加班就像借钱--原则是救急不救穷。
 
